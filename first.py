@@ -8,10 +8,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 # Load datasets
-medal_counts = pd.read_csv('/mnt/data/summerOly_medal_counts.csv', encoding='latin1')
-hosts = pd.read_csv('/mnt/data/summerOly_hosts.csv', encoding='latin1')
-programs = pd.read_csv('/mnt/data/summerOly_programs.csv', encoding='latin1')
-athletes = pd.read_csv('/mnt/data/summerOly_athletes.csv', encoding='latin1')
+medal_counts = pd.read_csv('/data/2025_Problem_C_Data/summerOly_medal_counts.csv', encoding='latin1')
+hosts = pd.read_csv('data/2025_Problem_C_Data/summerOly_hosts.csv', encoding='latin1')
+programs = pd.read_csv('data/2025_Problem_C_Data/summerOly_programs.csv', encoding='latin1')
+athletes = pd.read_csv('data/2025_Problem_C_Data/summerOly_athletes.csv', encoding='latin1')
 
 # Data exploration
 def preview_data():
