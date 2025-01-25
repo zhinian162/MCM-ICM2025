@@ -20,9 +20,10 @@ def preview_data():
     print("Programs Dataset:\n", programs.head())
     print("Athletes Dataset:\n", athletes.head())
 
+
 preview_data()
 
-#Data preprocessing
+# Data preprocessing
 # Extract relevant features from medal_counts and hosts
 medal_counts['Host'] = medal_counts['Year'].map(
     hosts.set_index('Year')['Host'].to_dict()
@@ -50,6 +51,7 @@ medal_counts['IsHost'] = medal_counts['NOC'] == medal_counts['Host']
 features = ['HistoricalGold', 'HistoricalSilver', 'HistoricalBronze', 'HistoricalTotal', 'IsHost']
 labels_gold = medal_counts['Gold']
 labels_total = medal_counts['Total']
+X = medal_counts[features]
 # Train-test split
 X_train, X_test, y_train_gold, y_test_gold = train_test_split(X, labels_gold, test_size=0.2, random_state=42)
 X_train, X_test, y_train_total, y_test_total = train_test_split(X, labels_total, test_size=0.2, random_state=42)
@@ -61,6 +63,7 @@ rf_gold.fit(X_train, y_train_gold)
 rf_total = RandomForestRegressor(random_state=42)
 rf_total.fit(X_train, y_train_total)
 
+
 # Model evaluation
 def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
@@ -68,6 +71,7 @@ def evaluate_model(model, X_test, y_test):
     mae = mean_absolute_error(y_test, predictions)
     print(f"MSE: {mse}, MAE: {mae}")
     return predictions
+
 
 gold_predictions = evaluate_model(rf_gold, X_test, y_test_gold)
 total_predictions = evaluate_model(rf_total, X_test, y_test_total)
@@ -91,7 +95,7 @@ plt.title('Actual vs Predicted Total Medals')
 plt.legend()
 plt.show()
 
-#Feature importance
+# Feature importance
 importance_gold = rf_gold.feature_importances_
 importance_total = rf_total.feature_importances_
 
